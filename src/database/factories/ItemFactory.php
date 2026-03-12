@@ -11,11 +11,12 @@ class ItemFactory extends Factory
      *
      * @return array
      */
+    protected $model = \App\Models\Item::class;
+
     public function definition()
     {
         return [
-            'user_id' => \App\Models\User::inRandomOrder()->first()->id,
-            'category_id' => \App\Models\Category::inRandomOrder()->first()->id,
+            'user_id' => \App\Models\User::inRandomOrder()->value('id'),
             'condition_id' => \App\Models\Condition::inRandomOrder()->first()->id,
 
             'name' => $this->faker->words(3, true),
@@ -23,6 +24,8 @@ class ItemFactory extends Factory
             'description' => $this->faker->realText(100),
 
             'price' => $this->faker->numberBetween(500, 20000),
+
+            'brand' => $this->faker->company(),
 
             'image' => 'sample.jpg',
 
